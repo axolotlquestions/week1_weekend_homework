@@ -48,3 +48,30 @@
       end
     end
   end
+
+  def add_pet_to_stock(shop, new_pet)
+    shop[:pets].push(new_pet)
+  end
+
+  def customer_pet_count(customers)
+    customers[:pets].count()
+  end
+
+  def add_pet_to_customer(customer, new_pet)
+    customer[:pets].push(new_pet)
+  end
+
+  def customer_can_afford_pet(customer, new_pet)
+  customer[:cash] >= new_pet[:price]
+  end
+
+  def sell_pet_to_customer(shop, pet, customer)
+    if pet != nil #this was very tricky - didn't realise the find per by name function was being ran in the test.
+    if customer_can_afford_pet(customer, pet)
+      add_pet_to_customer(customer, pet)
+      remove_pet_by_name(shop, pet)
+      increase_pets_sold(shop, 1)
+      add_or_remove_cash(shop, pet[:price])
+    end
+  end
+  end
